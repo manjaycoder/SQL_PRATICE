@@ -1,0 +1,364 @@
+CREATE TABLE USERS(
+      user_id INT PRIMARY KEY AUTO_INCREMENT,
+      first_name VARCHAR(255) NOT NULL,
+      last_name VARCHAR(255) NOT NULL,
+      email VARCHAR(255) UNIQUE NOT NULL,
+      password VARCHAR(255) NOT NULL,
+      age int
+);
+
+
+INSERT INTO USERS (first_name, last_name, email, password, age)
+VALUES
+('Jane', 'Doe', 'jane@example.com', 'password4', 10),
+('Michael', 'Brown', 'michael@example.com', 'password5', 20),
+('Emma', 'Johnson', 'emma1@example.com', 'password6', 35),
+('William', 'Davis', 'william@example.com', 'password7', 30),
+('Olivia', 'Martinez', 'olivia@example.com', 'password8', 35),
+('James', 'Miller', 'james@example.com', 'password9', 35),
+('Sophia', 'Garcia', 'sophia@example.com', 'password10', 40),
+('Benjamin', 'Rodriguez', 'benjamin@example.com', 'password11', 42),
+('Amelia', 'Lopez', 'amelia@example.com', 'password12', 45),
+('Elijah', 'Lee', 'elijah@example.com', 'password13', 50),
+('Charlotte', 'Harris', 'charlotte@example.com', 'password14', 60),
+('David', 'Clark', 'david@example.com', 'password15', 70),
+('Mia', 'Lewis', 'mia@example.com', 'password16', 80),
+('Alexander', 'Allen', 'alexander@example.com', 'password17', 15),
+('Isabella', 'Young', 'isabella@example.com', 'password18', 18),
+('Ethan', 'Wright', 'ethan@example.com', 'password19', 22),
+('Ava', 'King', 'ava@example.com', 'password20', 24),
+('Noah', 'Scott', 'noah@example.com', 'password21', 21),
+('Liam', 'Green', 'liam@example.com', 'password22', 34),
+('Emma', 'Baker', 'emma2@example.com', 'password23', 31);
+select * from users;
+
+SELECT SUBSTRING(first_name, 2) FROM USERS;
+
+select substring(first_name, 1, 7) from users;
+SELECT REPLACE("HELLO WORLD", "WORLD", "BYEE");
+SELECT REPLACE("HUXN", "X", "Z");
+
+select replace(last_name, "doe", "doeeeeeeeeeeeeee") from users;
+-------------------------------------------------------------------------------
+SELECT REVERSE("HELLO WIRLD");
+SELECT REVERSE("HUXN");
+SELECT REVERSE(FIRST_NAME) FROM USERS;
+SELECT REVERSE(LAST_NAME) FROM USERS;
+SELECT REVERSE(PASSWORD) FROM USERS;
+----------------------------------------------------------------------------------------------
+SELECT char_length("HELLO WORLD");
+SELECT CHAR_LENGTH("HUXN");
+SELECT LENGTH(LAST_NAME) FROM USERS;
+--------------------------------------------------------------------------------------------------------
+SELECT FIRST_NAME FROM USERS ORDER BY LENGTH(FIRST_NAME) DESC;
+
+SELECT FIRST_NAME FROM USERS LIMIT 4;
+---------------------------------------------------------------------------------------------------------------
+SELECT * FROM USERS
+WHERE FIRST_NAME LIKE "%J%";
+
+SELECT * FROM USERS
+WHERE FIRST_NAME LIKE "%M%";
+SELECT first_name From USERS ORDER BY first_name asc;
+
+SELECT first_name FROM USERS ORDER BY first_name DESC;
+SELECT first_name from users order by length(first_name);
+SELECT first_name from users limit 5;
+------------------------------------------------
+select * from USERS
+-- WHERE first_name LIKE "%A"
+-- WHERE first_name LIKE "%MMA"
+WHERE FIRST_NAME LIKE "_MMA";
+-------------------------------------
+
+SELECT COUNT(*) FROM USERS;
+SELECT COUNT(FIRST_NAME) FROM USERS;
+
+
+SELECT COUNT(*) FROM USERS
+WHERE FIRST_NAME ="EMMA";
+
+SELECT COUNT(*) FROM USERS
+WHERE FIRST_NAME ="MICHEAL";
+----------------------------------------------------------------
+SELECT MIN(AGE) FROM USERS;
+SELECT MAX(AGE) FROM USERS;
+SELECT AVG(AGE) FROM USERS;
+SELECT SUM(AGE) FROM USERS;
+-------------------------------------------------------------
+SELECT FIRST_NAME, AVG(AGE) AS AVERSE_AGE
+FROM USERS
+group by FIRST_NAME;
+----------------------------------------------
+SELECT FIRST_NAME, LAST_NAME 
+FROM USERS
+-- WHERE AGE != 35
+-- WHERE FIRST_NAME != "EMMA";
+WHERE PASSWORD != "PASSWORD";
+ -------------------------------------------------
+ SELECT *
+ FROM USERS
+--  WHERE AGE > 50;
+WHERE LENGTH(FIRST_NAME) >15;
+----------------------------------------------------------------------
+SELECT * 
+FROM USERS
+-- WHERE AGE < 50;
+WHERE LENGTH(FIRST_NAME)  >   1;
+
+
+
+---------------------------------------------------------------
+
+SELECT *
+FROM USERS
+-- WHERE AGE > 50 AND LENGTH(FIRST_NAME) > 5;
+WHERE FIRST_NAME ="EMMA" AND LAST_NAME ="JOHNSON";
+--------------------------------------------------------------------
+SELECT *
+FROM USERS
+-- WHERE AGE < 30 OR AGE > 70;
+WHERE FIRST_NAME ="NOTHING" OR LAST_NAME = "JOHNSON";
+----------------------------------------------------------------------
+SELECT *
+FROM USERS
+WHERE AGE BETWEEN 40 AND 60;
+---------------------------------------------------------------
+SELECT *
+FROM USERS
+-- WHERE AGE IN (25,30,35)
+-- WHERE FIRST_NAME IN ("JANE","EMMA", "OLIVIA");
+WHERE EMAIL IN ("jane@eample.com", "olivia@example.com");
+-------------------------------------------------------------------------------------------
+SELECT 
+    FIRST_NAME, 
+    AGE,
+    CASE
+        WHEN AGE < 30 THEN 'YOUNG'
+        WHEN AGE >= 30 AND AGE < 60 THEN 'MIDLE-AGE'
+        ELSE 'SENIOR'
+    END AS AGE_GROUP
+FROM USERS;
+----------------------------------------------------------------------------------------------------
+CREATE TABLE SERIES(
+  ID INT AUTO_INCREMENT PRIMARY KEY,
+  TITLE VARCHAR(255) UNIQUE,
+  RELEASE_YEAR INT,
+  GENRE VARCHAR(255)
+  );
+  INSERT INTO SERIES ( TITLE, RELEASE_YEAR,GENRE)
+  VALUES ('STRINGER THING', 2011, 'SCIENCE FICTION'),
+  ('GAME OF THRONES' , 2011, 'FANTASY'),
+  -- ('GAME OF THRONES' , 2011 ," FANTASY")
+  ('BREAKING BAD' , 2016, 'DRAME'),
+  ('THE CROWN', 2016, ' HISTORICAL DRAMA');
+  SELECT * FROM SERIES;
+  -------------------------------------------------------------------------
+  CREATE  TABLE EMPLOYEE (
+    EMP_ID INT PRIMARY KEY,
+    EMP_NAME VARCHAR(50),
+    EMP_AGE INT CHECK (EMP_AGE >= 18 AND EMP_AGE <= 65),
+    EMP_SALARY DECIMAL(10 , 2 ) CHECK (EMP_SALARY >= 0)
+    );
+  INSERT INTO EMPLOYEE ( EMP_ID, EMP_NAME, EMP_AGE, EMP_SALARY)
+  VALUES(1,"HUXN", 25,50000.00);
+  SELECT * FROM EMPLOYEE;
+  
+  -----------------------------------------------------------------------------
+--   THIS SHOULD FAIL DUE TO AGE CONSTRAITS;
+  INSERT INTO EMPLOYEE ( EMP_ID, EMP_NAME, EMP_AGE, EMP_SALARY)
+VALUES(2, "BOB",16,600000.00);
+-------------------------------------------------
+-- THIS SHOULD FAIL DUE TO SALARY CONSTRAINT
+  INSERT INTO EMPLOYEE ( EMP_ID, EMP_NAME, EMP_AGE, EMP_SALARY)
+VALUES(3,"CHARLIE",35,-78898989);
+
+  ------------------------------------------------------------------
+  CREATE TABLE EMPLOYEE(
+  EMP_ID INT PRIMARY KEY,
+  EMP_NAME VARCHAR(50),
+  EMP_AGE INT ,
+  EMP_SALARY DECIMAL(10, 2),
+  constraint CHK_EMP_AGE CHECK(EMP_AGE >= 18 AND EMP_AGE <= 65),
+  constraint CHK_EMP_SALARY check (EMP_SALARY>= 0)
+  );
+--   THIS SHOULD SUCEED
+INSERT INTO EMPLOYEE(EMP_ID, EMP_NAME, EMP_AGE, EMP_SALARY)
+VALUES(1,"JORDAN", 25, 5000.00);  
+
+  
+  SELECT * FROM EMPLOYEE;
+  -----------------------------------
+--   THIS SHOULD NOT SUCEESUED DUE TO AGE
+INSERT INTO EMPLOYEE (EMP_ID, EMP_NAME, EMP_AGE, EMP_SALARY)
+VALUES(2,"BOB", 16,6000.00);
+  
+  
+--   THIS SHOULD FAIL DUE TO SALARY CONSTRAINT
+
+INSERT INTO EMPLOYEE (EMP_ID, EMP_NAME, EMP_AGE, EMP_SALARY)
+VALUES(4, "CHARLIE", 30, -10000.00) ;
+  
+-------------------------------------------------------------------------------------------------------------------------------
+-- ALTER DROP COLUMN IS USE TO DELETE THE COLUMN THE COLUMN FROM THE TABLE
+ALTER TABLE EMPLOYEE
+DROP COLUMN EMP_SALARY;
+SELECT * FROM EMPLOYEE;
+---------------------------------------------------------------------------------
+-- ALTER TABLE TABLE_NAME MODEIFY COLUMN COLUMN_NAME NEW_DATA_TYPE
+ALTER TABLE EMPLOYEE
+MODIFY COLUMN EMP_NAME VARCHAR(255);
+-------------------------------------------------------------------------------
+-- ALTER TABLE TABLE_NAME CHANGE COLUMN OLD_TABLE_NAME NEW_TABLE_NAME PREVIOUS_DATA_TYPE_LIMIT;
+ALTER TABLE EMPLOYEE
+CHANGE COLUMN EMP_NAME EMP_FULLNAME VARCHAR(50);
+-------------------------------------------------------------------------------------------------
+ALTER TABLE EMPLOYEE;
+---------------------------------------------------------------------------------------------------
+-- RELATIONSHIP 
+CREATE TABLE ENGINEER(
+     ENGINEER_ID INT AUTO_INCREMENT PRIMARY KEY,
+     ENGINEER_NAME VARCHAR(255) NOT NULL,
+     PROFESSION VARCHAR(255) NOT NULL,
+     EMAIL VARCHAR(50)
+     );
+CREATE TABLE TASKS(
+   TASK_ID INT AUTO_INCREMENT PRIMARY KEY,
+   TASK_NAME VARCHAR(255),
+   TASK_dESCRIPTION TEXT,
+   ENGINEER_ID INT,
+   FOREIGN KEY (ENGINEER_ID) references ENGINEER(ENGINEER_ID)
+ );
+   INSERT INTO ENGINEER (ENGINEER_NAME, PROFESSION, EMAIL)
+   VALUES ("ALICE JOHNSON", "FULL_STACK", "AJ@GMAIL.COM "),
+   ("BOB SMITH", "BACK END", "BOB@GMAIL.COM"),
+   ("CHARLIE BROWN", "FRONT_END", "CHBROWN@GMAIL.COM");
+ INSERT INTO TASKS (TASK_NAME, TASK_DESCRIPTION, ENGINEER_ID)
+ VALUES("TASK 1", "DESIGN THE UI IN FIGMA", 1),
+ ("TASK 2", "BUILD THE SERVER IN BUN",2),
+ ("TASK 3", "CODE THE UI IN TAILWIND",1);
+ SELECT * FROM TASKS;
+ 
+  
+  -----------------------------------------------------------------------------------------------------------------------------------------------
+--   A CROSS JOIN IS A TYPE OF JOIN OPERATION THAT COMBINE EACH ROW FROM ONE TABLE WITH EVERY ROW FROM ANOTHER TABLE. IT ESSENTIALLY CREATES A NEW RESULT SET CONTAINING ALL POSSIBLE COMBINATION OF ROWS FROM THE JOINED TABLES.
+--   SELECT * FROM ENGINEER CROSS JOIN TASKS
+-- SELECT * FROM ENGINEER,TASKS  
+-- -----------INNER JOIN-
+-- --AN INNER JOIN SELECTS RECORDS THAT HAVE MATCHING VALUES IN BOTH TABLES.
+SELECT * FROM ENGINEER
+INNER JOIN TASKS ON ENGINEER.ENGINEER_ID=TASKS.ENGINEER_ID;
+
+-- WRITE A ALIAS FOR YOU NOT WANNA TO WRITE A EXTRA WORD
+SELECT * FROM ENGINEER E
+INNER JOIN TASKS T ON E.ENGINEER_ID=T.ENGINEER_ID;
+
+SELECT ENGINEER_NAME, EMAIL, TASK_NAME FROM ENGINEER E
+INNER JOIN TASKS T ON E.ENGINEER_ID=T.ENGINEER_ID;
+
+SELECT * FROM ENGINEER E
+JOIN TASKS T ON E.ENGINEER_ID=T.ENGINEER_ID;
+---------------------------------------------------------------------------------------------------------------------
+-- LEFT JOIN
+-- A LEFT JOIN RETURNS.    ALL RECORDS FROM THE LEFT TABLE (ENGINEER) AND THE MATCHED RECORDS FROM THE RIGHT TABLE(TASKS).
+-- IF THERE'S NO MATCH, THE RESULT IS NULL FROM THE RIGHT SIDE.
+SELECT * FROM ENGINEER E
+LEFT JOIN TASKS T ON E.ENGINEER_ID=T.ENGINEER_ID;
+-- RIGHT JOIN
+-- A RIGHT JOIN RETURN ALL RECORDS FROM YHE RIGHT TABLE (TASKS), AND THE MATCHED RECORDS FROM THE LEFT TABLE (ENGINEER) IF THERE'S NO MATCH , THE RESULT IS NULL FROM THE LEFT SIDE
+SELECT * FROM ENGINEER E
+RIGHT JOIN TASK T ON E.ENGINEER_ID=T.ENGINEER_ID;
+-------------------------------------------------------------------------------------------------------------------
+-- MAMY TO MANY
+CREATE TABLE MOVIES(
+MOVIE_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+TITLE VARCHAR(100) NOT NULL,
+YEAR INT NOT NULL,
+DIRECTOR VARCHAR(100) NOT NULL,
+GENRE VARCHAR(50) NOT NULL
+);
+CREATE TABLE PERSON(
+    PERSON_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    NAME VARCHAR(100) NOT NULL,
+    AGE INT,
+    EMAIL VARCHAR(255),
+    GENDER VARCHAR(255),
+    COUNTRY VARCHAR(255)
+    );
+    CREATE TABLE COMMENT (
+    COMMENT_ID INT PRIMARY KEY NOT NULL auto_increment,
+    COMMENT_CONTENT TEXT NOT NULL,
+    MOVIE_ID INT NOT NULL,
+    PERSON_ID INT NOT NULL,
+    FOREIGN KEY (MOVIE_ID) references MOVIES(MOVIE_ID),
+    foreign key(PERSON_ID) references PERSON(PERSON_ID)
+    );
+    INSERT INTO Movies(title, year, director, genre)
+VALUES ('The Shawshank Redemption',1994,'Frank Darabont','Drama'),
+('The Godfather',1972,'Francis Ford Coppola','Crime'),
+('The Godfather: Part II',1974,'Francis Ford Coppola','Crime'),
+('The Dark Knight',2008,'Christopher Nolan','Action'),
+('12 Angry Men',1957,'Sidney Lumet','Drama'),
+('Schindler''s List',1993,'Steven Spielberg','Drama'),
+('Pulp Fiction',1994,'Quentin Tarantino','Crime'),
+('The Lord of the Rings: The Return of the King',2003,'Peter Jackson','Action'),
+('The Good, the Bad and the Ugly',1966,'Sergio Leone','Western'),
+('Fight Club',1999,'David Fincher','Drama');
+
+
+INSERT INTO PERSON(name,age,email,gender,country)
+VALUES ('Tom Hanks', 63, 'Vx5uZ@example.com', 'Male', 'United States'),
+    ('Brad Pitt', 59, 'U7lZD@example.com', 'Male', 'United States'),
+    ('Leonardo DiCaprio', 47, 'Vx5uZ@example.com', 'Male', 'United States'),
+    ('Margot Robbie', 35, 'Vx5uZ@example.com', 'Female', 'United States'),
+    ('Kate Winslet', 32, 'Vx5uZ@example.com', 'Female', 'United States'),
+    ('Christian Bale', 45, 'Vx5uZ@example.com', 'Male', 'United States'),
+    ('Heath Ledger', 49, 'Vx5uZ@example.com', 'Male', 'United States'),
+    ('Gary Oldman', 51, 'Vx5uZ@example.com', 'Male', 'United States'),
+    ('Tom Cruise', 47, 'Vx5uZ@example.com', 'Male', 'United States');
+INSERT INTO Comment(movie_id, person_id, comment_content)
+VALUES (1,1,'I really like this movie.'),
+       (2, 2, 'I really like this movie.'),
+       (3, 3, 'I really like this movie.'),
+       (4, 4, 'I really like this movie.'),
+       (5, 5, 'I really like this movie.'),
+       (6, 6, 'I really like this movie.'),
+       (7, 7, 'I really like this movie.'),
+       (8, 8, 'I really like this movie.'),
+       (9, 9, 'I really like this movie.');
+
+SELECT* FROM MOVIES M
+RIGHT JOIN PERSON P ON M.MOVIE_ID=P.PERSON_ID;
+
+-----------------------------------------------------------------------------
+CREATE TABLE EMPLOYEE(
+  ID INT  PRIMARY KEY,
+  FIRST_NAME VARCHAR(50),
+  LAST_NAME VARCHAR(50),
+  DEPARTMENT VARCHAR(50),
+  SALARY DECIMAL(10,2)
+  );
+  INSERT INTO EMPLOYEE(ID, FIRST_NAME ,LAST_NAME, DEPARTMENT, SALARY)
+  VALUES(1,"JOHN","DOE","IT",5000.00),
+  (2,"JANE","SMITH","HR",6000.00),
+  (3,"ALICE","JOHNSON","FINANCE",7000.00);
+--   CREATE A VEIWS
+CREATE VIEW EMPLOYEE_NAME AS
+SELECT ID, CONCAT(FIRST_NAME ," ", LAST_NAME) AS FULL_NAME FROM EMPLOYEE;
+
+
+
+SELECT * FROM EMPLOYEE_NAME;
+-- UPDATE THE VIEW (RECREATE IT)
+CREATE OR REPLACE VIEW EMPLOYEE_NAME AS
+SELECT ID, CONCAT(FIRST_NAME ," ", LAST_NAME) AS FULL_NAME FROM EMPLOYEE
+WHERE DEPARTMENT="IT";
+SELECT * FROM EMPLOYEE_NAME;
+
+-------------------------------------------------------
+-- DELETE THE VIEWS 
+DROP VIEW EMPLOYEE_NAME;
+DROP DATABASE MACHNINE;
+
+
+
